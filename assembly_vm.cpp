@@ -13,8 +13,9 @@ int njmp=-1,nvmap=-1;int n=-1;
  * 3:add    4:mul
  * 5:jmp    6:jc
  * 7:in     8:out
- * B:sub    
+ * B:sub    C:div
  * D:and    E:or
+ * F:mov
  * 暂未全部实现
  **/
 
@@ -67,6 +68,9 @@ inline void runcom(ins rins,int &pc){
     }
     case 7:cin>>reg[rins.a];break;
     case 8:cout<<reg[rins.a]<<endl;break;
+    case 12:reg[rins.a]=reg[rins.a]/reg[rins.b];break;
+    case 15:reg[rins.a]=reg[rins.b];break;
+    case nulln:break;
     default:cout<<"No This Instruct"<<endl;break;
     }
 }
@@ -86,14 +90,13 @@ inline ins getins(cins a,int pc){
     case 'L':ins.com=1;break;
     case 'S':ins.com=(a.com[1]=='T')?2:11;break;
     case 'A':ins.com=3;break;
-    case 'M':ins.com=4;break;
+    case 'M':ins.com=(a.com[1]=='U')?4:15;break;
     case 'J':ins.com=(a.com[1]=='M')?5:6;break;
     case 'O':ins.com=8;break;
     case 'P':ins.com=9;break;
     case 'R':ins.com=10;break;
-    default:
-        cout<<"Read error on "<<a.com<<endl;
-        break;
+    case 'D':ins.com=12;break;
+    default:ins.com=nulln;break;
     }
     if(ins.com!=0){
         ins.a=getadd(a.a);ins.b=getadd(a.b);}
