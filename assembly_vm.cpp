@@ -55,7 +55,7 @@ inline void runcom(ins rins,int &pc){
         break;
     }
     case 6:{
-        if(rins.a<=0)return;
+        if(reg[rins.a]<=0)return;
         for(int i=0;i<=njmp;i++){
             if (!cinsr[pc].b.compare(jmp[i].name)){
                 pc=jmp[i].add-1;
@@ -122,6 +122,8 @@ int main(){
     for(int i=0;i<=regsize;i++)reg[i]=nulln;
     string readstr;
     cout<<"Please enter the number of statements:";cin>>n;
+    cin.get();
+
     for(int i=0;i<n;i++){
         getline(cin,readstr);int a=0,b=0;
         for(int i=0;i<readstr.length();i++)
