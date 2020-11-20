@@ -20,7 +20,7 @@
 
 ## 样例
 借此程序可实现很多功能，譬如该NOIp 2012 普及组的题目:
-[P1075 质因数分解](https://www.luogu.com.cn/problem/P1075)
+[P1075 质因数分解](https://www.luogu.com.cn/problem/P1075)  
 此题可以考验该程序跳转、条件判断的实现。  
 以下代码均可在同目录下找到。
 
