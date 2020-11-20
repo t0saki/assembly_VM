@@ -1,99 +1,32 @@
 # 计算机原理作业：虚拟机
 
-**2020213235 吴郑啸**
+**tosaki**
 
-
-
-
-
-Markdown是一种可以使用普通文本编辑器编写的标记语言，通过简单的标记语法，它可以使普通文本内容具有一定的格式。它允许人们使用易读易写的纯文本格式编写文档，然后转换成格式丰富的HTML页面，Markdown文件的后缀名便是“.md”
-
-
-## MdEditor是一个在线编辑Markdown文档的编辑器
-
-*MdEditor扩展了Markdown的功能（如表格、脚注、内嵌HTML等等），以使让Markdown转换成更多的格式，和更丰富的展示效果，这些功能原初的Markdown尚不具备。*
-
-> Markdown增强版中比较有名的有Markdown Extra、MultiMarkdown、 Maruku等。这些衍生版本要么基于工具，如~~Pandoc~~，Pandao；要么基于网站，如GitHub和Wikipedia，在语法上基本兼容，但在一些语法和渲染效果上有改动。
-
-MdEditor源于Pandao的JavaScript开源项目，开源地址[Editor.md](https://github.com/pandao/editor.md "Editor.md")，并在MIT开源协议的许可范围内进行了优化，以适应广大用户群体的需求。向优秀的markdown开源编辑器原作者Pandao致敬。
-
-
-![Pandao editor.md](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png "Pandao editor.md")
-
-
-
-## MdEditor的功能列表演示
-
-# 标题H1
-
-## 标题H2
-
-### 标题H3
-
-#### 标题H4
-
-##### 标题H5
-
-###### 标题H5
-
-### 字符效果和横线等
+## 基本设定
 ----
-
-~~删除线~~ <s>删除线（开启识别HTML标签时）</s>
-
-*斜体字*      _斜体字_
-
-**粗体**  __粗体__
-
-***粗斜体*** ___粗斜体___
-
-上标：X<sub>2</sub>，下标：O<sup>2</sup>
-
-**缩写(同HTML的abbr标签)**
-> 即更长的单词或短语的缩写形式，前提是开启识别HTML标签时，已默认开启
-
-The <abbr title="Hyper Text Markup Language">HTML</abbr> specification is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.
-### 引用 Blockquotes
-
-> 引用文本 Blockquotes
-
-引用的行内混合 Blockquotes
-
-> 引用：如果想要插入空白换行`即<br />标签`，在插入处先键入两个以上的空格然后回车即可，[普通链接](https://www.mdeditor.com/)。
-
-### 锚点与链接 Links
-[普通链接](https://www.mdeditor.com/)
-[普通链接带标题](https://www.mdeditor.com/ "普通链接带标题")
-直接链接：<https://www.mdeditor.com>
-[锚点链接][anchor-id]
-[anchor-id]: https://www.mdeditor.com/
-[mailto:test.test@gmail.com](mailto:test.test@gmail.com)
-GFM a-tail link @pandao
-邮箱地址自动链接 test.test@gmail.com  www@vip.qq.com
-> @pandao
-
-### 多语言代码高亮 Codes
-
-#### 行内代码 Inline code
+该程序命令均为大写字母，并假设输入的参数为变量代号(仅支持字母)或内存地址(仅支持十进制数字)，命令、变量之间可用空格或半角逗号隔开。  
+对于布尔类型，值>0的为True，否则为False。  
+该程序可在运行开始后对内存和外存进行虚拟化。为了方便调试起见，外部I/O暂时被编写为键盘/屏幕，故外存暂未实现。  
+由于本人对汇编语言实在是不熟悉，故很多命令可能不符合汇编的表达形式，还请谅解。
 
 
-执行命令：`npm install marked`
+## 语句说明
+----
+- LD,ST:从内存相应地址中读取/存入
+- ADD,SUB,MUL,DIV:加减乘除四则运算
+- JMP,JC:无条件/条件跳转
+- AND,OR,NOT:布尔与/或运算
+- MOV:复制值
+- IN,OUT:外部输出输出
 
-#### 缩进风格
+## 样例
+----
+借此程序可实现很多功能，譬如该NOIp 2012 普及组的题目:
+[P1075 质因数分解](https://www.luogu.com.cn/problem/P1075)
+此题可以考验该程序跳转、条件判断的实现。  
+以下代码均可在同目录下找到。
 
-即缩进四个空格，也做为实现类似 `<pre>` 预格式化文本 ( Preformatted Text ) 的功能。
-
-    <?php
-        echo "Hello world!";
-    ?>
-预格式化文本：
-
-    | First Header  | Second Header |
-    | ------------- | ------------- |
-    | Content Cell  | Content Cell  |
-    | Content Cell  | Content Cell  |
-
-#### JS代码
+#### 等效Python代码
 ```python
 n=int(input())
 flag=False
@@ -106,138 +39,47 @@ for i in range(int(n/2+1),1,-1):
 print(i)
 ```
 
-#### HTML 代码 HTML codes
-```html
-<!DOCTYPE html>
-<html>
-    <head>
-        <mate charest="utf-8" />
-        <meta name="keywords" content="Editor.md, Markdown, Editor" />
-        <title>Hello world!</title>
-        <style type="text/css">
-            body{font-size:14px;color:#444;font-family: "Microsoft Yahei", Tahoma, "Hiragino Sans GB", Arial;background:#fff;}
-            ul{list-style: none;}
-            img{border:none;vertical-align: middle;}
-        </style>
-    </head>
-    <body>
-        <h1 class="text-xxl">Hello world!</h1>
-        <p class="text-green">Plain text</p>
-    </body>
-</html>
+#### 自创代码
+```asm
+INT N
+IN N
+INT I
+INT J
+INT RNGI
+INT RNGJ
+MOV RNGI N
+INT TMP
+LD TMP 0
+ADD RNGI TMP
+LD TMP 1
+DIV RNGI TMP
+INT TMP1
+INT TMP2
+
+MV I RNGI
+istart:
+    LD J 1
+    jstart:
+        MOV TMP I
+        MUL TMP J
+        MOV TMP2 N
+        SUB TMP2 TMP
+        SUB TMP N
+        OR TMP TMP2
+        NOT TMP TMP
+        JC TMP endf
+    forjend:
+    LD TMP 0
+    ADD J TMP
+    MOV TMP I
+    SUB TMP J
+    JC TMP jstart
+LD TMP 0
+SUB I TMP
+MOV TMP1 I
+SUB TMP1 TMP
+JC TMP1 istart
+endf:
+OUT I
 ```
-### 图片 Images
-
-图片加链接 (Image + Link)：
-
-
-[![](https://www.mdeditor.com/images/logos/markdown.png)](https://www.mdeditor.com/images/logos/markdown.png "markdown")
-
-> Follow your heart.
-
-----
-### 列表 Lists
-
-#### 无序列表（减号）Unordered Lists (-)
-
-- 列表一
-- 列表二
-- 列表三
-
-#### 无序列表（星号）Unordered Lists (*)
-
-* 列表一
-* 列表二
-* 列表三
-
-#### 无序列表（加号和嵌套）Unordered Lists (+)
-+ 列表一
-+ 列表二
-    + 列表二-1
-    + 列表二-2
-    + 列表二-3
-+ 列表三
-    * 列表一
-    * 列表二
-    * 列表三
-
-#### 有序列表 Ordered Lists (-)
-
-1. 第一行
-2. 第二行
-3. 第三行
-
-#### GFM task list
-
-- [x] GFM task list 1
-- [x] GFM task list 2
-- [ ] GFM task list 3
-    - [ ] GFM task list 3-1
-    - [ ] GFM task list 3-2
-    - [ ] GFM task list 3-3
-- [ ] GFM task list 4
-    - [ ] GFM task list 4-1
-    - [ ] GFM task list 4-2
-
-----
-
-### 绘制表格 Tables
-
-| 项目        | 价格   |  数量  |
-| --------   | -----:  | :----:  |
-| 计算机      | $1600   |   5     |
-| 手机        |   $12   |   12   |
-| 管线        |    $1    |  234  |
-
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-
-| Function name | Description                    |
-| ------------- | ------------------------------ |
-| `help()`      | Display the help window.       |
-| `destroy()`   | **Destroy your computer!**     |
-
-| Left-Aligned  | Center Aligned  | Right Aligned |
-| :------------ |:---------------:| -----:|
-| col 3 is      | some wordy text | $1600 |
-| col 2 is      | centered        |   $12 |
-| zebra stripes | are neat        |    $1 |
-
-| Item      | Value |
-| --------- | -----:|
-| Computer  | $1600 |
-| Phone     |   $12 |
-| Pipe      |    $1 |
-
-----
-
-### 绘制流程图 Flowchart
-
-```flow
-st=>start: 用户登陆
-op=>operation: 登陆操作
-cond=>condition: 登陆成功 Yes or No?
-e=>end: 进入后台
-
-st->op->cond
-cond(yes)->e
-cond(no)->op
-```
-[========]
-
-### 绘制序列图 Sequence Diagram
-
-```seq
-Andrew->China: Says Hello
-Note right of China: China thinks\nabout it
-China-->Andrew: How are you?
-Andrew->>China: I am good thanks!
-```
-### End
+根据视频验证，该程序能正常实现功能。
