@@ -51,8 +51,8 @@ inline void runcom(ins rins,int &pc){
                 pc=jmp[i].add-1;
                 return;
             }
-            cout<<"No Jump"<<endl;
         }
+        cout<<"No Jump"<<endl;
         break;
     }
     case 6:{
@@ -62,8 +62,8 @@ inline void runcom(ins rins,int &pc){
                 pc=jmp[i].add-1;
                 return;
             }
-            cout<<"No Jump"<<endl;
         }
+        cout<<"No Jump"<<endl;
         break;
     }
     case 7:cin>>reg[rins.a];break;
@@ -81,9 +81,6 @@ inline void runcom(ins rins,int &pc){
 inline ins getins(cins a,int pc){
     ins ins;int l=(a.com.length());int hasj=-1;
     for(int i=0;i<l;i++)
-        if(a.com[i]!=' '){a.com=substr(i);break;}
-    l=(a.com.length())
-    for(int i=0;i<l;i++)
         if(a.com[i]==':'){hasj=i;break;}
     if(hasj!=-1){
         string jmpn=(a.com).substr(0,hasj);
@@ -95,7 +92,7 @@ inline ins getins(cins a,int pc){
     case 'I':ins.com=(a.com[2]=='T')?0:7;break;
     case 'L':ins.com=1;break;
     case 'S':ins.com=(a.com[1]=='T')?2:11;break;
-    case 'A':ins.com=(a.com[1]=='N')?3:13;break;
+    case 'A':ins.com=(a.com[1]=='D')?3:13;break;
     case 'M':ins.com=(a.com[1]=='U')?4:15;break;
     case 'J':ins.com=(a.com[1]=='M')?5:6;break;
     case 'O':ins.com=(a.com[1]=='U')?8:14;break;
@@ -136,11 +133,15 @@ int main(){
 
     for(int i=0;i<n;i++){
         getline(cin,readstr);int a=0,b=0;
+        if(readstr=="")continue;
+        for(int i=0;i<readstr.length();i++)
+            if(readstr[i]!=' '){readstr=readstr.substr(i);break;}
         for(int i=0;i<readstr.length();i++)
             if(readstr[i]==' '||readstr[i]==','){a=i;break;};
         for(int i=a+1;i<readstr.length();i++)if(readstr[i]==' '||readstr[i]==','){b=i;break;};
         cinsr[i].com=readstr.substr(0,a);
-        if(b!=0){
+        if(!a) cinsr[i].com=readstr;
+        else if(b!=0){
             cinsr[i].a=readstr.substr(a+1,b-a-1);
             cinsr[i].b=readstr.substr(b+1);
         }else cinsr[i].a=readstr.substr(a+1);
