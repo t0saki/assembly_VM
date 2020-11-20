@@ -1,7 +1,7 @@
+//https://www.luogu.com.cn/problem/P1075
+//NOIp普及组 2012
 INT N
 IN N
-INT FL
-LD FL 2
 INT I
 INT J
 INT RNGI
@@ -24,12 +24,9 @@ istart:
         MOV TMP2 N
         SUB TMP2 TMP
         SUB TMP N
-        AND TMP TMP2
+        OR TMP TMP2
         NOT TMP TMP
-        JC TMP ifend
-            LD FL 0
-            JMP endf
-        ifend:
+        JC TMP endf
     forjend:
     LD TMP 0
     ADD J TMP
