@@ -69,6 +69,8 @@ inline void runcom(ins rins,int &pc){
     case 7:cin>>reg[rins.a];break;
     case 8:cout<<reg[rins.a]<<endl;break;
     case 12:reg[rins.a]=reg[rins.a]/reg[rins.b];break;
+    case 13:reg[rins.a]=(reg[rins.a]>0)&&(reg[rins.b]>0);break;
+    case 14:reg[rins.a]=(reg[rins.a]>0)||(reg[rins.b]>0);break;
     case 15:reg[rins.a]=reg[rins.b];break;
     case nulln:break;
     default:cout<<"No This Instruct"<<endl;break;
@@ -92,10 +94,10 @@ inline ins getins(cins a,int pc){
     case 'I':ins.com=(a.com[2]=='T')?0:7;break;
     case 'L':ins.com=1;break;
     case 'S':ins.com=(a.com[1]=='T')?2:11;break;
-    case 'A':ins.com=3;break;
+    case 'A':ins.com=(a.com[1]=='N')?3:13;break;
     case 'M':ins.com=(a.com[1]=='U')?4:15;break;
     case 'J':ins.com=(a.com[1]=='M')?5:6;break;
-    case 'O':ins.com=8;break;
+    case 'O':ins.com=(a.com[1]=='U')?8:14;break;
     case 'P':ins.com=9;break;
     case 'R':ins.com=10;break;
     case 'D':ins.com=12;break;
