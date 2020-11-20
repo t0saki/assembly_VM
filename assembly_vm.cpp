@@ -15,7 +15,7 @@ int njmp=-1,nvmap=-1;int n=-1;
  * 7:in     8:out
  * B:sub    C:div
  * D:and    E:or
- * F:mov
+ * F:mov    G:not
  * 暂未全部实现
  **/
 
@@ -71,6 +71,7 @@ inline void runcom(ins rins,int &pc){
     case 12:reg[rins.a]=reg[rins.a]/reg[rins.b];break;
     case 13:reg[rins.a]=(reg[rins.a]>0)&&(reg[rins.b]>0);break;
     case 14:reg[rins.a]=(reg[rins.a]>0)||(reg[rins.b]>0);break;
+    case 16:reg[rins.a]=!(reg[rins.b]>0);break;
     case 15:reg[rins.a]=reg[rins.b];break;
     case nulln:break;
     default:cout<<"No This Instruct"<<endl;break;
@@ -101,6 +102,7 @@ inline ins getins(cins a,int pc){
     case 'P':ins.com=9;break;
     case 'R':ins.com=10;break;
     case 'D':ins.com=12;break;
+    case 'N':ins.com=16;break;
     default:ins.com=nulln;break;
     }
     if(ins.com!=0){
