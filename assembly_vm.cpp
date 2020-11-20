@@ -78,6 +78,9 @@ inline void runcom(ins rins,int &pc){
 inline ins getins(cins a,int pc){
     ins ins;int l=(a.com.length());int hasj=-1;
     for(int i=0;i<l;i++)
+        if(a.com[i]!=' '){a.com=substr(i);break;}
+    l=(a.com.length())
+    for(int i=0;i<l;i++)
         if(a.com[i]==':'){hasj=i;break;}
     if(hasj!=-1){
         string jmpn=(a.com).substr(0,hasj);
