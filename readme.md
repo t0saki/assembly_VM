@@ -22,6 +22,7 @@
 - AND,OR,NOT:布尔与/或运算
 - MOV:复制值
 - IN,OUT:外部输出输出
+- INC:读取字符并转化为整形
 
 ## 原理说明
 该程序全部内容都在同目录assembly_vm.cpp中。  
@@ -29,7 +30,7 @@
 变量表、跳转标签表均使用数组手动实现(写完了这部分才想起来有个map可以用)。
 
 
-## 样例
+## 样例1
 借此程序可实现很多功能，譬如该NOIp 2012 普及组的题目:
 [P1075 质因数分解](https://www.luogu.com.cn/problem/P1075)  
 此题可以考验该程序跳转、条件判断的实现。  
@@ -148,3 +149,49 @@ OUT I
 
 若最后的数字输入77则输出11。  
 故可认为该程序正常运行。
+
+## 样例2  
+计算字符串长度。  
+```asm
+INT I
+INT STEP
+INT B
+INT END
+INT TMP
+INT ST
+IN I
+MV ST I
+IN STEP
+IN END
+CHARIN B
+start:CHARIN B
+ST I B
+MV TMP END
+EQU TMP B
+JC TMP out
+ADD I STEP
+JMP start
+out:SUB I ST
+OUT I
+```
+无需提前输入内存数据，第一行输入一个较大的数代表内存写入位置，第二行输入1表示步长，第三次输入36代表结束符'$'的ASCII码。  
+
+## 样例3  
+计算1+.....+100  
+```asm
+INT I
+INT SUM
+INT STEP
+INT END
+INT TMP
+IN END
+IN STEP
+start:ADD I STEP
+ADD SUM I
+MV TMP I
+EQU TMP END
+JC TMP endp
+JMP start
+endp:OUT SUM
+```
+无需提前输入内存数据，第一行输入100表示终止数字，第二行输入1表示步长。

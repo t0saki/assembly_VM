@@ -16,6 +16,7 @@ int njmp=-1,nvmap=-1;int n=-1;
  * B:sub    C:div
  * D:and    E:or
  * F:mov    G:not
+ * H:charin I:equ
  * 暂未全部实现
  **/
 
@@ -41,7 +42,7 @@ inline void runcom(ins rins,int &pc){
         break;
     }
     case 1:reg[rins.a]=ram[rins.b];break;
-    case 2:ram[rins.a]=reg[rins.b];break;
+    case 2:ram[reg[rins.a]]=reg[rins.b];break;
     case 3:reg[rins.a]+=reg[rins.b];break;
     case 11:reg[rins.a]-=reg[rins.b];break;
     case 4:reg[rins.a]=reg[rins.a]*reg[rins.b];break;
@@ -73,6 +74,11 @@ inline void runcom(ins rins,int &pc){
     case 14:reg[rins.a]=(reg[rins.a]>0)||(reg[rins.b]>0);break;
     case 16:reg[rins.a]=!(reg[rins.b]>0);break;
     case 15:reg[rins.a]=reg[rins.b];break;
+    case 18:{
+        char inch=getchar();
+        reg[rins.a]=int(inch);
+        break;}
+    case 19:reg[rins.a]=(reg[rins.a])==(reg[rins.b]);break;
     case nulln:break;
     default:cout<<"No This Instruct"<<endl;break;
     }
@@ -100,6 +106,8 @@ inline ins getins(cins a,int pc){
     case 'R':ins.com=10;break;
     case 'D':ins.com=12;break;
     case 'N':ins.com=16;break;
+    case 'C':ins.com=18;break;
+    case 'E':ins.com=19;break;
     default:ins.com=nulln;break;
     }
     if(ins.com!=0){
@@ -125,7 +133,7 @@ int main(){
     memset(vmap,0,sizeof(vmap));
     //for(int i=0;i<=ramsize;i++)ram[i]=0;//认为内存中值为nulln的为空地址
     initram(ram,"ram");
-    initram(disk,"disk");
+    //initram(disk,"disk");
     for(int i=0;i<=regsize;i++)reg[i]=nulln;
     string readstr;
     cout<<"Please enter the number of statements:";cin>>n;
